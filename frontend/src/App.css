@@ -1,0 +1,29 @@
+html * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#root {
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+}
+
+div.calendar {
+    width: 50vw;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+div.cell {
+    width: calc((50vw - 14px) / 7);
+    height: 50px;
+    /* border: 1px solid black; */
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+    border-right: 0;
+    border-bottom: 0;
+}
