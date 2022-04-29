@@ -1,18 +1,14 @@
-import { useState } from "react"
-import Cell from "./Cell"
+import CalendarHeader from './CalendarHeader'
+import CalendarDays from './CalendarDays'
+import CalendarFooter from './CalendarFooter'
 
-const Calendar = () => {
-    const [day, setDay] = useState()
-    const [month, setMonth] = useState()
-    const [year, setYear] = useState()
-
-    let lala = [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+const Calendar = (): JSX.Element => {
 
     return (
-        <div className='calendar'>
-            {
-                lala.map((lolo, index) => <Cell number={lolo} key={index} />)
-            }
+        <div className='calendar-container'>
+            <CalendarHeader />
+            <CalendarDays />
+            <CalendarFooter />
         </div>
     )
 }

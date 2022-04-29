@@ -1,13 +1,19 @@
-import './App.css';
-import Calendar from './components/Calendar';
+import './App.css'
+import Title from './components/Title'
+import Columns from './components/Columns'
+import Calendar from './components/Calendar'
+import Schedule from './components/Schedule'
 
-function App() {
+const App = (): JSX.Element => {
   return (
-    <>
-      <h1>Dancing With Death</h1>
-      <Calendar />
-    </>
-  );
+    <main>
+      <Title>Dancing with Death</Title>
+      <Columns>
+        <Calendar />
+        <Schedule />
+      </Columns>
+    </main>
+  )
 }
 
-export default App;
+export default App
