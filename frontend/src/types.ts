@@ -23,5 +23,7 @@ export interface ContextProps {
     days: number[],
     chosenDate: DateProps,
     setChosenDate: React.Dispatch<React.SetStateAction<DateProps>>,
-    currentDate: CurrentDateProps
+    currentDate: CurrentDateProps,
+    chosenTime: string,
+    setChosenTime: React.Dispatch<React.SetStateAction<string>>
 }

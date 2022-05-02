@@ -1,8 +1,8 @@
 import { useContext } from 'react'
-import AppContext from '../context/AppContext'
+import AppContext from '../../context/AppContext'
 
 const MonthPicker = (): JSX.Element => {
-    const { monthsOfTheYear, chosenDate, setChosenDate } = useContext(AppContext)
+    const { monthsOfTheYear, chosenDate, setChosenDate, setChosenTime } = useContext(AppContext)
 
     // Generating months options for picker
     const options = monthsOfTheYear.map((month, index) => <option key={month} value={index}>{month}</option>)
@@ -10,7 +10,10 @@ const MonthPicker = (): JSX.Element => {
     return (
         <select
             value={chosenDate.month}
-            onChange={(e) => setChosenDate({ ...chosenDate, day: 0, month: parseInt(e.target.value) })}
+            onChange={(e) => {
+                setChosenDate({ ...chosenDate, day: 0, month: parseInt(e.target.value) })
+                setChosenTime('')
+            }}
         >
             {options}
         </select>

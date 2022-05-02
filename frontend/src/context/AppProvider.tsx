@@ -5,7 +5,6 @@ import { ReactNode, useState } from 'react'
 import useDate from '../hooks/useDate'
 import useDays from '../hooks/useDays'
 import AppContext from './AppContext'
-// import { UserProps } from '../types/contex'
 
 const AppProvider = (props: { children: ReactNode }) => {
     // Getting current date
@@ -34,6 +33,7 @@ const AppProvider = (props: { children: ReactNode }) => {
         'December'
     ]
 
+    const [chosenTime, setChosenTime] = useState('09:00-10:00')
     // const [userState, dispatch] = useReducer(userReducer, { name: null, token: null })
 
     // const login = async (credentials: UserProps) => {
@@ -46,10 +46,6 @@ const AppProvider = (props: { children: ReactNode }) => {
     //     } catch (error: any) {
     //         return error.message
     //     }
-    // }
-
-    // const logout = () => {
-    //     dispatch({ type: "LOGOUT" })
     // }
 
     // const getAllCalls = async (token: string) => {
@@ -77,7 +73,9 @@ const AppProvider = (props: { children: ReactNode }) => {
             days,
             monthsOfTheYear,
             chosenDate,
-            setChosenDate
+            setChosenDate,
+            chosenTime,
+            setChosenTime
         }}>
             {props.children}
         </AppContext.Provider>

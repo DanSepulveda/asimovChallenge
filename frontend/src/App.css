@@ -2,187 +2,119 @@
     --red: #9D0B28;
     --gray: rgba(183, 183, 183, 0.6);
     --light-red: rgba(157, 11, 40, 0.2);
+    --green: 107, 203, 120;
 }
 
 html * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-#root {
-    width: 100%;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 main {
     width: 100%;
     min-height: 100vh;
-    color: #eee;
-    background: #232526;
-    background: -webkit-linear-gradient(to right, #414345, #232526);
-    background: linear-gradient(to right, #414345, #232526);
+    color: #444;
+    background-color: #ccc;
 }
 
 h1 {
-    padding: 1em;
-    font-size: 30px;
-    text-align: center;
     font-family: 'Tillana', cursive;
 }
 
-.icon-title {
-    margin: 0 20px;
-}
-
-@media (max-width: 1400px) {}
-
-@media (max-width: 1200px) {}
-
-@media (max-width: 992px) {}
-
-@media (max-width: 768px) {}
-
-@media (max-width: 576px) {
-    .icon-title {
-        display: none;
-    }
-}
-
-section.columns {
-    display: flex;
-    padding: 0 3em;
-}
-
-/* DATE PICKER */
-div.calendar-container {
-    width: 420px;
-    display: flex;
-    flex-direction: column;
-}
-
-div.calendar-header {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-div.calendar-title {
-    background-color: var(--red);
-    padding: .8em 0;
-    padding-left: 2em;
-    border-radius: 5px 5px 0 0;
-}
-
-div.calendar-dayName {
-    display: flex;
-    padding: 8px 0;
+div.bg-red {
     background-color: var(--red);
 }
 
-div.name {
-    width: calc(420px / 7);
-    text-align: center;
-    font-size: 17px;
+div.width {
+    width: calc(100% / 7);
 }
 
-div.calendar-days {
-    display: flex;
-    flex-wrap: wrap;
-    background-color: var(--gray);
-}
-
-div.disabledDay,
-div.activeDay,
-div.inactiveDay {
-    width: calc(420px / 7);
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    user-select: none;
-    text-align: center;
-    font-size: 22px;
-    padding: .5em 0;
-}
-
-div.activeDay {
+/* DAYS STYLES */
+div.active-day {
     cursor: pointer;
     transition: all 300ms ease-in-out;
 }
 
-div.activeDay:hover {
-    background-color: rgba(85, 123, 131, 0.5);
+div.active-day:hover {
+    background-color: rgba(var(--green), 0.5);
 }
 
-div.active {
-    background-color: rgb(85, 123, 131);
+div.selected-day,
+div.selected-day:hover {
+    background-color: rgba(var(--green), 1);
+    color: white;
 }
 
-div.active:hover {
-    background-color: rgb(85, 123, 131)
-}
-
+/* WEEKEND STYLES */
+div.calendar-days div:nth-child(7n-6),
 div.calendar-days div:nth-child(7n) {
-    flex: 1;
-    background-color: var(--light-red);
     cursor: unset;
+    color: var(--red);
+    background-color: var(--light-red);
 }
 
-div.calendar-days div:nth-child(7n-6) {
-    background-color: var(--light-red);
-    cursor: unset;
-}
-
+/* DISABLE EVENTS ON INACTIVE DAYS AND WEEKEND */
+div.inactive-day:active,
 div.calendar-days div:nth-child(7n):active,
 div.calendar-days div:nth-child(7n-6):active {
     pointer-events: none;
 }
 
-div.disabledDay {
-    border-right: none;
+/* EMPTY BOX STYLES */
+div.disabled-day {
+    border-right: none !important;
     background-color: initial !important;
     pointer-events: none;
 }
 
-div.inactiveDay {
+/* INACTIVE DAY STYLES */
+div.inactive-day {
     background-color: var(--light-red);
 }
 
-div.inactiveDay:active {
-    pointer-events: none;
-}
-
-div.tooltip {
+/* TOOLTIP STYLES */
+div.custom-tooltip {
     display: none;
     position: absolute;
     margin-left: 70px;
-    padding: .3em 1em;
-    background-color: #232526 !important;
-    border-radius: 2em;
+    margin-top: -30px;
+    color: white !important;
+    background-color: #444 !important;
 }
 
-div.calendar-days div:nth-child(7n) .tooltip::after,
-div.calendar-days div:nth-child(7n-6) .tooltip::after {
+/* TEXT FOR WEEKEND OR PREVIOUS DAYS */
+div.calendar-days div:nth-child(7n) .custom-tooltip::after,
+div.calendar-days div:nth-child(7n-6) .custom-tooltip::after {
     content: 'No appointments on weekends';
 }
 
-.inactiveDay .tooltip::after {
+.inactive-day .custom-tooltip::after {
     content: "Can't select a previous date";
 }
 
-div.inactiveDay:hover .tooltip,
-div.calendar-days div:nth-child(7n):hover .tooltip,
-div.calendar-days div:nth-child(7n-6):hover .tooltip {
+div.inactive-day:hover .custom-tooltip,
+div.calendar-days div:nth-child(7n):hover .custom-tooltip,
+div.calendar-days div:nth-child(7n-6):hover .custom-tooltip {
     display: block;
-
 }
 
-div.calendar-footer {
-    display: flex;
-    background-color: var(--gray);
-    border-radius: 0 0 5px 5px;
-    padding: 1em;
+/* SCHEDULE SECTION */
+button {
+    color: #444;
+    background-color: #f8f9fa;
+    border: 1px solid #444;
+    transition: all 300ms ease-in-out;
 }
 
-div.calendar-footer p {
-    font-size: 22px;
-    margin-right: 1em;
+button:hover {
+    background-color: rgba(var(--green), 0.5)
+}
+
+button.selected-time,
+button.selected-time:hover {
+    color: white;
+    background-color: rgba(var(--green), 1);
+    border: 1px solid rgb(21, 85, 11);
 }

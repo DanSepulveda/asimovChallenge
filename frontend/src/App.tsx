@@ -1,16 +1,18 @@
 import './App.css'
-import Title from './components/Title'
-import Columns from './components/Columns'
-import Calendar from './components/Calendar'
-import Schedule from './components/Schedule'
+import H1 from './components/atoms/H1'
+import Columns from './components/templates/Columns'
+import Calendar from './components/organisms/Calendar'
+import Schedule from './components/organisms/Schedule'
+import Form from './components/organisms/Form'
 
 const App = (): JSX.Element => {
   return (
     <main>
-      <Title>Dancing with Death</Title>
+      <H1>Dancing with Death</H1>
       <Columns>
         <Calendar />
         <Schedule />
+        <Form />
       </Columns>
     </main>
   )

@@ -1,8 +1,8 @@
 import { useContext } from 'react'
-import AppContext from '../context/AppContext'
+import AppContext from '../../context/AppContext'
 
 const YearPicker = () => {
-    const { currentYear, chosenDate, setChosenDate } = useContext(AppContext)
+    const { currentYear, chosenDate, setChosenDate, setChosenTime } = useContext(AppContext)
 
     // Pushing 10 elements to array of years
     let years = []
@@ -14,7 +14,10 @@ const YearPicker = () => {
     return (
         <select
             value={chosenDate.year}
-            onChange={(e) => setChosenDate({ ...chosenDate, day: 0, year: parseInt(e.target.value) })}
+            onChange={(e) => {
+                setChosenDate({ ...chosenDate, day: 0, year: parseInt(e.target.value) })
+                setChosenTime('')
+            }}
         >
             {options}
         </select>
