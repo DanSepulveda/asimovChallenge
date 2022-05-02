@@ -5,3 +5,7 @@ export interface ConfigProps {
     database: string | undefined,
     port: number | undefined
 }
+
+export interface ResponseProps {
+    time_from: number
+}
