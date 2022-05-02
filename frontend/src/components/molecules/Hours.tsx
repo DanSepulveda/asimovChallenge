@@ -13,7 +13,7 @@ const Hours = () => {
     // Conditional for only show rows when date is selected
     const { chosenDate } = useContext(AppContext)
     const showComponent = chosenDate.day === 0
-        ? <Message>Yout must to select a date first!</Message>
+        ? <Message>Please complete step 1</Message>
         : buttons
 
     return (

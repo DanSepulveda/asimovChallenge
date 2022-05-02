@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import AppContext from '../../context/AppContext'
 
 const DayBox = (props: { day: number }): JSX.Element => {
-    const { chosenDate, setChosenDate, currentDate } = useContext(AppContext)
+    const { chosenDate, setChosenDate, currentDate, setChosenTime } = useContext(AppContext)
     const { currentDay, currentMonth, currentYear } = currentDate
     const { day, year, month } = chosenDate
 
@@ -33,7 +33,10 @@ const DayBox = (props: { day: number }): JSX.Element => {
         <div
             className={`${className}${selected} width text-center py-2 fs-5 border-end border-bottom`}
             style={{ 'userSelect': 'none' }}
-            onClick={() => setChosenDate({ ...chosenDate, day: props.day })}
+            onClick={() => {
+                setChosenDate({ ...chosenDate, day: props.day })
+                setChosenTime('')
+            }}
         >
             {props.day !== 0 && props.day}
             <div className='custom-tooltip rounded-3 p-1 fs-6'></div>

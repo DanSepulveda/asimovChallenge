@@ -1,12 +1,24 @@
 // import axios from 'axios'
-// import { useReducer } from 'react'
-// import userReducer from './userReducer'
-import { ReactNode, useState } from 'react'
+import { ReactNode, useReducer, useState } from 'react'
 import useDate from '../hooks/useDate'
 import useDays from '../hooks/useDays'
+import { Data } from '../types'
 import AppContext from './AppContext'
 
 const AppProvider = (props: { children: ReactNode }) => {
+    const reducer = (state: { open: boolean }, action: { type: string, payload?: any }) => {
+        const { type } = action
+        switch (type) {
+            case 'SCHEDULE':
+                return {
+                    open: !state.open
+                }
+            default:
+                return state
+        }
+    }
+    const [state, dispatch] = useReducer(reducer, { open: false })
+
     // Getting current date
     const currentDate = useDate()
     const { currentYear, currentMonth, currentDay } = currentDate
@@ -33,36 +45,21 @@ const AppProvider = (props: { children: ReactNode }) => {
         'December'
     ]
 
-    const [chosenTime, setChosenTime] = useState('09:00-10:00')
-    // const [userState, dispatch] = useReducer(userReducer, { name: null, token: null })
+    const [chosenTime, setChosenTime] = useState('')
 
-    // const login = async (credentials: UserProps) => {
-    //     try {
-    //         const response = await axios.post(`${HOST}/login`, credentials)
-    //         if (response.data.response) {
-    //             dispatch({ type: "LOGIN", payload: response.data.response })
-    //             return response.data
-    //         }
-    //     } catch (error: any) {
-    //         return error.message
-    //     }
-    // }
-
-    // const getAllCalls = async (token: string) => {
-    //     try {
-    //         const response = await axios.get(`${HOST}/calls`, {
-    //             headers: {
-    //                 Authorization: token
-    //             }
-    //         })
-    //         if (response.data.success) {
-    //             return response.data
-    //         }
-    //         throw new Error()
-    //     } catch (error: any) {
-    //         return error.message
-    //     }
-    // }
+    const schedule = async (data: Data) => {
+        try {
+            console.log(data)
+            // const response = await axios.post('', data)
+            // if (response.data.response) {
+            dispatch({ type: 'SCHEDULE' })
+            setChosenDate({ year: currentYear, month: currentMonth, day: 0 })
+            setChosenTime('')
+            // }
+        } catch (error: any) {
+            return error
+        }
+    }
 
     return (
         <AppContext.Provider value={{
@@ -75,7 +72,9 @@ const AppProvider = (props: { children: ReactNode }) => {
             chosenDate,
             setChosenDate,
             chosenTime,
-            setChosenTime
+            setChosenTime,
+            open: state.open,
+            schedule
         }}>
             {props.children}
         </AppContext.Provider>

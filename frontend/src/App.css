@@ -118,3 +118,14 @@ button.selected-time:hover {
     background-color: rgba(var(--green), 1);
     border: 1px solid rgb(21, 85, 11);
 }
+
+/* FORM STYLES */
+input:disabled {
+    background-color: transparent;
+    border: none;
+}
+
+button.send-button:hover {
+    background-color: #9D0B28;
+    color: white;
+}
