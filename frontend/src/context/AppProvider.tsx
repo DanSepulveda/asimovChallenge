@@ -74,7 +74,8 @@ const AppProvider = (props: { children: ReactNode }) => {
             chosenTime,
             setChosenTime,
             open: state.open,
-            schedule
+            schedule,
+            dispatch
         }}>
             {props.children}
         </AppContext.Provider>

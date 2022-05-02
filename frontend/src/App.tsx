@@ -6,6 +6,7 @@ import Schedule from './components/organisms/Schedule'
 import Confirmation from './components/organisms/Confirmation'
 import { useContext } from 'react'
 import AppContext from './context/AppContext'
+import Resume from './components/organisms/Resume'
 
 const App = (): JSX.Element => {
   const { open } = useContext(AppContext)
@@ -13,7 +14,7 @@ const App = (): JSX.Element => {
   return (
     <main>
       <H1>Dancing with Death</H1>
-      {open && <h1>Cita agendada</h1>}
+      {open && <Resume />}
       <Columns>
         <Calendar />
         <Schedule />

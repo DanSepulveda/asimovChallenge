@@ -27,7 +27,8 @@ export interface ContextProps {
     chosenTime: string,
     setChosenTime: React.Dispatch<React.SetStateAction<string>>,
     open: boolean,
-    schedule: Function
+    schedule: Function,
+    dispatch: any
 }
 
 export interface InputProps {
