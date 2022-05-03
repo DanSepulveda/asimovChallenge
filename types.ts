@@ -3,7 +3,7 @@ export interface ConfigProps {
     user: string | undefined,
     password: string | undefined,
     database: string | undefined,
-    port: number | undefined
+    port: string | undefined
 }
 
 export interface ResponseProps {
