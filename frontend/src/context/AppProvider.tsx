@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ReactNode, useReducer, useState } from 'react'
+import { ReactNode, useReducer } from 'react'
 import useDate from '../hooks/useDate'
 import useDays from '../hooks/useDays'
 import { Data } from '../types'
@@ -22,8 +22,10 @@ const AppProvider = (props: { children: ReactNode }) => {
         reserved: []
     }
 
+
     const [state, dispatch] = useReducer(appReducer, initialValues)
     const { open, chosenDate, chosenTime, reserved } = state
+    console.log(chosenDate)
 
     // Number array to create calendar
     const days = useDays({ year: chosenDate.year, month: chosenDate.month })
@@ -50,6 +52,7 @@ const AppProvider = (props: { children: ReactNode }) => {
         const date = `${chosenDate.year}-${chosenDate.month + 1}-${day}`
         const response = await axios.post(`${HOST}/available-appointments`, { date })
         dispatch({ type: 'RESERVED_HOURS', payload: response.data.reservedHours })
+
     }
 
     const schedule = async (data: Data) => {

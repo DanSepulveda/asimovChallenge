@@ -33,10 +33,10 @@ const DayBox = (props: { day: number }) => {
         <div
             className={`${className}${selected} width text-center py-2 fs-5 border-end border-bottom`}
             style={{ 'userSelect': 'none' }}
-            onClick={() => {
+            onClick={async () => {
+                await getScheduledAppointments(props.day)
                 dispatch({ type: 'CHANGE_CHOSEN_DATE', payload: { ...chosenDate, day: props.day } })
                 dispatch({ type: 'CHANGE_CHOSEN_TIME', payload: null })
-                getScheduledAppointments(props.day)
             }}
         >
             {props.day !== 0 && props.day}

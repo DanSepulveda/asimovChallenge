@@ -1,12 +1,9 @@
-import { ReducerWithoutAction } from "react"
-import { State } from "../types"
-
-
 const appReducer = (state: any, action: { type: string, payload?: any }) => {
     const { type, payload } = action
     switch (type) {
         case 'HANDLE_RESUME':
             return {
+                ...state,
                 open: payload
             }
         case 'CHANGE_CHOSEN_DATE':

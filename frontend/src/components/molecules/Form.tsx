@@ -19,9 +19,9 @@ const Form = () => {
         try {
             const response = await schedule({ date, time: chosenTime, email })
             if (response.success) {
-                dispatch({ type: 'HANDLE_RESUME', payload: false })
-                dispatch({ type: 'CHANGE_CHOSEN_DATE', payload: { year: currentYear, month: currentMonth, day: 0 } })
-                dispatch({ type: 'CHANGE_CHOSEN_TIME', payload: null })
+                await dispatch({ type: 'HANDLE_RESUME', payload: true })
+                await dispatch({ type: 'CHANGE_CHOSEN_DATE', payload: { year: currentYear, month: currentMonth, day: 0 } })
+                await dispatch({ type: 'CHANGE_CHOSEN_TIME', payload: null })
                 alert('correcto')
             } else {
                 throw new Error(response)

@@ -151,3 +151,11 @@ div.resume-container {
 .close-button:hover svg {
     fill: var(--red);
 }
+
+.time-disabled {
+    background-color: var(--light-red);
+    color: var(--red);
+    border: 1px solid var(--red);
+    pointer-events: none;
+    user-select: none;
+}
