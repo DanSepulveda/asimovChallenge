@@ -22,10 +22,8 @@ const AppProvider = (props: { children: ReactNode }) => {
         reserved: []
     }
 
-
     const [state, dispatch] = useReducer(appReducer, initialValues)
     const { open, chosenDate, chosenTime, reserved } = state
-    console.log(chosenDate)
 
     // Number array to create calendar
     const days = useDays({ year: chosenDate.year, month: chosenDate.month })

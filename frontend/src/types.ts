@@ -47,7 +47,8 @@ export interface InputProps {
     type?: string,
     readonly?: boolean,
     disabled?: boolean,
-    onChange?: any
+    onChange?: any,
+    name: string
 }
 
 export interface ButtonTimeProps {

@@ -1,11 +1,11 @@
 import { InputProps } from '../../types'
 
-const Input = (props: InputProps) => {
-    const { label, disabled, value, readonly, onChange, type } = props
+const Input = (props: InputProps): JSX.Element => {
+    const { label, disabled, value, readonly, onChange, type, name } = props
 
     return (
         <div className='d-flex flex-column'>
-            <label className='text-center fs-4'>{label}</label>
+            <label className='text-center fs-4' htmlFor={name}>{label}</label>
             <input
                 type={type || 'text'}
                 value={value}
@@ -13,6 +13,8 @@ const Input = (props: InputProps) => {
                 readOnly={readonly}
                 onChange={onChange}
                 className='text-center mb-3 fs-5 fw-light w-100'
+                name={name}
+                id={name}
             />
         </div>
     )

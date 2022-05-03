@@ -159,3 +159,7 @@ div.resume-container {
     pointer-events: none;
     user-select: none;
 }
+
+.error {
+    color: var(--red);
+}
