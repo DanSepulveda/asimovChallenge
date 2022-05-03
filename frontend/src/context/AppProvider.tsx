@@ -44,7 +44,7 @@ const AppProvider = (props: { children: ReactNode }) => {
         'December'
     ]
 
-    const HOST = 'http://localhost:4000/api'
+    const HOST = 'https://asimov-dansep.herokuapp.com/api'
 
     const getScheduledAppointments = async (day: number) => {
         const date = `${chosenDate.year}-${chosenDate.month + 1}-${day}`
