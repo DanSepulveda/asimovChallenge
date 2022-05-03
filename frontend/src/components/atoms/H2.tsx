@@ -1,6 +1,6 @@
 import { BsFillCalendarDateFill, BsFillClockFill, BsClipboardCheck } from 'react-icons/bs'
 
-const H2 = (props: { children: string, icon: string }): JSX.Element => {
+const H2 = (props: Props) => {
     const { children, icon } = props
 
     const icons: any = {
@@ -20,3 +20,8 @@ const H2 = (props: { children: string, icon: string }): JSX.Element => {
 }
 
 export default H2
+
+interface Props {
+    children: string,
+    icon: string
+}

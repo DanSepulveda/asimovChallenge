@@ -1,30 +1,29 @@
-// import axios from 'axios'
+import axios from 'axios'
 import { ReactNode, useReducer, useState } from 'react'
 import useDate from '../hooks/useDate'
 import useDays from '../hooks/useDays'
 import { Data } from '../types'
 import AppContext from './AppContext'
+import appReducer from './appReducer'
 
 const AppProvider = (props: { children: ReactNode }) => {
-    const reducer = (state: { open: boolean }, action: { type: string, payload?: any }) => {
-        const { type } = action
-        switch (type) {
-            case 'SCHEDULE':
-                return {
-                    open: !state.open
-                }
-            default:
-                return state
-        }
-    }
-    const [state, dispatch] = useReducer(reducer, { open: false })
-
     // Getting current date
     const currentDate = useDate()
-    const { currentYear, currentMonth, currentDay } = currentDate
+    const { currentYear, currentMonth } = currentDate
 
-    // Setting up user date selection. By default is setted up to current month and year
-    const [chosenDate, setChosenDate] = useState({ year: currentYear, month: currentMonth, day: 0 })
+    const initialValues = {
+        open: false,
+        chosenDate: {
+            year: currentYear,
+            month: currentMonth,
+            day: 0
+        },
+        chosenTime: null,
+        reserved: []
+    }
+
+    const [state, dispatch] = useReducer(appReducer, initialValues)
+    const { open, chosenDate, chosenTime, reserved } = state
 
     // Number array to create calendar
     const days = useDays({ year: chosenDate.year, month: chosenDate.month })
@@ -45,37 +44,32 @@ const AppProvider = (props: { children: ReactNode }) => {
         'December'
     ]
 
-    const [chosenTime, setChosenTime] = useState('')
+    const HOST = 'http://localhost:4000/api'
+
+    const getScheduledAppointments = async (day: number) => {
+        const date = `${chosenDate.year}-${chosenDate.month + 1}-${day}`
+        const response = await axios.post(`${HOST}/available-appointments`, { date })
+        dispatch({ type: 'RESERVED_HOURS', payload: response.data.reservedHours })
+    }
 
     const schedule = async (data: Data) => {
-        try {
-            console.log(data)
-            // const response = await axios.post('', data)
-            // if (response.data.response) {
-            dispatch({ type: 'SCHEDULE' })
-            setChosenDate({ year: currentYear, month: currentMonth, day: 0 })
-            setChosenTime('')
-            // }
-        } catch (error: any) {
-            return error
-        }
+        const response = await axios.post(`${HOST}/schedule`, data)
+        if (response.data.success) return { success: true }
+        else return response.data.error
     }
 
     return (
         <AppContext.Provider value={{
+            open,
+            reserved,
+            chosenDate,
+            chosenTime,
             currentDate,
-            currentYear,
-            currentMonth,
-            currentDay,
+            dispatch,
             days,
             monthsOfTheYear,
-            chosenDate,
-            setChosenDate,
-            chosenTime,
-            setChosenTime,
-            open: state.open,
             schedule,
-            dispatch
+            getScheduledAppointments
         }}>
             {props.children}
         </AppContext.Provider>

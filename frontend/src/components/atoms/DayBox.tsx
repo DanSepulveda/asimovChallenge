@@ -1,8 +1,8 @@
 import { useContext } from 'react'
 import AppContext from '../../context/AppContext'
 
-const DayBox = (props: { day: number }): JSX.Element => {
-    const { chosenDate, setChosenDate, currentDate, setChosenTime } = useContext(AppContext)
+const DayBox = (props: { day: number }) => {
+    const { chosenDate, currentDate, getScheduledAppointments, dispatch } = useContext(AppContext)
     const { currentDay, currentMonth, currentYear } = currentDate
     const { day, year, month } = chosenDate
 
@@ -34,8 +34,9 @@ const DayBox = (props: { day: number }): JSX.Element => {
             className={`${className}${selected} width text-center py-2 fs-5 border-end border-bottom`}
             style={{ 'userSelect': 'none' }}
             onClick={() => {
-                setChosenDate({ ...chosenDate, day: props.day })
-                setChosenTime('')
+                dispatch({ type: 'CHANGE_CHOSEN_DATE', payload: { ...chosenDate, day: props.day } })
+                dispatch({ type: 'CHANGE_CHOSEN_TIME', payload: null })
+                getScheduledAppointments(props.day)
             }}
         >
             {props.day !== 0 && props.day}

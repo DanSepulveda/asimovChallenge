@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import { AiOutlineCloseCircle } from 'react-icons/ai'
 import AppContext from '../../context/AppContext'
+import { AiOutlineCloseCircle } from 'react-icons/ai'
 
 const ButtonClose = () => {
     const { dispatch } = useContext(AppContext)
@@ -8,7 +8,7 @@ const ButtonClose = () => {
     return (
         <div
             className='mb-3 close-button'
-            onClick={() => dispatch({ type: 'SCHEDULE' })}
+            onClick={() => dispatch({ type: 'HANDLE_RESUME', payload: false })}
         >
             <AiOutlineCloseCircle className='fs-1' />
         </div>

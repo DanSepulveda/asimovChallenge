@@ -1,12 +1,12 @@
 import './App.css'
+import { useContext } from 'react'
+import AppContext from './context/AppContext'
 import H1 from './components/atoms/H1'
+import Resume from './components/organisms/Resume'
 import Columns from './components/templates/Columns'
 import Calendar from './components/organisms/Calendar'
 import Schedule from './components/organisms/Schedule'
 import Confirmation from './components/organisms/Confirmation'
-import { useContext } from 'react'
-import AppContext from './context/AppContext'
-import Resume from './components/organisms/Resume'
 
 const App = (): JSX.Element => {
   const { open } = useContext(AppContext)

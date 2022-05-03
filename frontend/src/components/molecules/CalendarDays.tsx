@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import AppContext from '../../context/AppContext'
 import DayBox from '../atoms/DayBox'
 
-const CalendarDays = (): JSX.Element => {
+const CalendarDays = () => {
     const { days } = useContext(AppContext)
 
     // Creating cell for each day

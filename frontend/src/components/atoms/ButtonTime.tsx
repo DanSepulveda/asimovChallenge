@@ -1,16 +1,20 @@
 import { useContext } from 'react'
 import AppContext from '../../context/AppContext'
+import { ButtonTimeProps } from '../../types'
 
-const ButtonTime = (props: { hour: string }) => {
-    const { hour } = props
-    const { chosenTime, setChosenTime } = useContext(AppContext)
+const ButtonTime = (props: ButtonTimeProps) => {
+    const { hourName, hourValue } = props
+    const { chosenTime, dispatch } = useContext(AppContext)
 
-    const selected = hour === chosenTime ? 'selected-time ' : ''
+    const selected = hourValue === chosenTime ? 'selected-time ' : ''
 
     return (
         <div className='py-2 px-3'>
-            {/* <div>{props.hour}</div> */}
-            <button className={`${selected}py-1 px-2 rounded`} onClick={() => setChosenTime(hour)}>{hour}</button>
+            <button
+                className={`${selected}py-1 px-2 rounded`}
+                onClick={() => dispatch({ type: 'CHANGE_CHOSEN_TIME', payload: hourValue })}>
+                {hourName}
+            </button>
         </div>
     )
 }

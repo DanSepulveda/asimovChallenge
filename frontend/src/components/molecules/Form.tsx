@@ -4,18 +4,34 @@ import Input from '../atoms/Input'
 
 const Form = () => {
     const [email, setEmail] = useState('')
-    const { chosenDate, chosenTime, schedule } = useContext(AppContext)
+    const { chosenDate, chosenTime, schedule, dispatch, currentDate } = useContext(AppContext)
+    const { currentYear, currentMonth } = currentDate
     const { year, month, day } = chosenDate
 
-    const date = `${day}/${month + 1}/${year}`
+    const date = `${year}-${month + 1}-${day}`
 
     const handleChange = (e: any): void => {
         setEmail(e.target.value)
     }
 
-    const scheduleAppointment = (e: any) => {
+    const scheduleAppointment = async (e: any) => {
         e.preventDefault()
-        schedule({ date, time: chosenTime, email })
+        try {
+            const response = await schedule({ date, time: chosenTime, email })
+            if (response.success) {
+                dispatch({ type: 'HANDLE_RESUME', payload: false })
+                dispatch({ type: 'CHANGE_CHOSEN_DATE', payload: { year: currentYear, month: currentMonth, day: 0 } })
+                dispatch({ type: 'CHANGE_CHOSEN_TIME', payload: null })
+                alert('correcto')
+            } else {
+                throw new Error(response)
+            }
+        } catch (error: unknown) {
+            let message
+            if (error instanceof Error) message = error.message
+            else message = String(error)
+            alert(message)
+        }
     }
 
     return (

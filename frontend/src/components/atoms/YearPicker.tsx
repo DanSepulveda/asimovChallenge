@@ -2,11 +2,11 @@ import { useContext } from 'react'
 import AppContext from '../../context/AppContext'
 
 const YearPicker = () => {
-    const { currentYear, chosenDate, setChosenDate, setChosenTime } = useContext(AppContext)
+    const { currentDate, chosenDate, dispatch } = useContext(AppContext)
 
     // Pushing 10 elements to array of years
     let years = []
-    for (let i = 0; i < 10; i++) years.push(currentYear + i)
+    for (let i = 0; i < 10; i++) years.push(currentDate.currentYear + i)
 
     // Generating months options for picker
     const options = years.map(year => <option key={year} value={year}>{year}</option>)
@@ -15,8 +15,8 @@ const YearPicker = () => {
         <select
             value={chosenDate.year}
             onChange={(e) => {
-                setChosenDate({ ...chosenDate, day: 0, year: parseInt(e.target.value) })
-                setChosenTime('')
+                dispatch({ type: 'CHANGE_CHOSEN_DATE', payload: { ...chosenDate, day: 0, year: parseInt(e.target.value) } })
+                dispatch({ type: 'CHANGE_CHOSEN_TIME', payload: null })
             }}
         >
             {options}

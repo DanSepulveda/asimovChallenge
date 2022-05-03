@@ -11,12 +11,12 @@ const appointmentsControllers = {
             if (appointment.length) throw new Error('Appointment already reserved')
 
             const response = await pool.query(`INSERT INTO appointments VALUES(null, '${date}', '${email}', '${time}')`)
-            return res.json({ response })
+            return res.json({ success: true, response })
         } catch (error) {
             let message
             if (error instanceof Error) message = error.message
             else message = String(error)
-            return res.json({ message })
+            return res.json({ success: false, error: message })
         }
     },
     getScheduledByDate: async (req: Request, res: Response) => {

@@ -5,10 +5,11 @@ import ButtonTime from '../atoms/ButtonTime'
 import Message from '../atoms/Message'
 
 const Hours = () => {
-    // Getting string array with hours range
+    // Getting string array with hours range names and values
     const hours = useHours({ from: 9, to: 17 })
+
     // Generating one row for each hour range
-    const buttons = hours.map(hour => <ButtonTime key={hour} hour={hour} />)
+    const buttons = hours.map(hour => <ButtonTime key={hour.name} hourName={hour.name} hourValue={hour.value} />)
 
     // Conditional for only show rows when date is selected
     const { chosenDate } = useContext(AppContext)

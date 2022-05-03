@@ -8,7 +8,10 @@ const useHours = (officeHours: { from: number, to: number }) => {
     }
 
     for (let i = from; i <= to; i++) {
-        hours.push(`${formatTime(i)}-${formatTime(i + 1)}`)
+        hours.push({
+            name: `${formatTime(i)}-${formatTime(i + 1)}`,
+            value: i
+        })
     }
 
     return hours

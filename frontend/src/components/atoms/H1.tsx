@@ -1,6 +1,6 @@
 import { GiDeathSkull } from 'react-icons/gi'
 
-const H1 = (props: { children: string }): JSX.Element => {
+const H1 = (props: { children: string }) => {
     return (
         <h1 className='pt-4 pb-5 fs-2 text-center'>
             <GiDeathSkull className='me-4' />
